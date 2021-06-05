@@ -35,25 +35,40 @@ def retrieve_posts():
             clips_fluff.append(post_data)
     return post_match_threads, news, clips_fluff
 
-def format_post_data(title, post_list, post_data, number_of_posts):
+def format_post_data(post_list, post_data, number_of_posts):
     # print('\033[1m' + title)
     # print('\033[0m',end='')
-    total_string = '\033[1m' + title 
-    total_string += '\033[0m'
+    # total_string = '\033[1m' + title 
+    # total_string += '\033[0m'
+    total_string = ""
     for i in range(0, number_of_posts):
         for j in post_data:
-            if(j == "post_title"):
-                # print(f"{post_list[i][j]}")
-                total_string += post_list[i][j]
+            if(len(post_data) == 3):
+                if(j == "post_title"):
+                    # print(f"{post_list[i][j]}")
+                    total_string += post_list[i][j]
+                elif(j == "score"):
+                    total_string += f" ({post_list[i][j]})\n"
+                else:
+                    # print(f"\t{post_list[i][j]}")
+                    total_string += "\t" + post_list[i][j]
+                    total_string += "\n"
             else:
-                # print(f"\t{post_list[i][j]}")
-                total_string += "\t" + post_list[i][j]
-        total_string += "\n"
+                if(j == "post_title"):
+                    # print(f"{post_list[i][j]}")
+                    total_string += post_list[i][j]
+                    total_string += "\n"
+                else:
+                    total_string += "\t" + post_list[i][j]
+                    total_string += "\n"
+        # total_string += "\n"
         # print()
     return total_string
     
 
 # post_match_threads, news, clips_fluff = retrieve_posts()
-# print_post_data('Post-Match Threads', post_match_threads, list(post_match_threads[0].keys()), 15)
-# print_post_data('News', news, list(news[0].keys()), 5)
-# print_post_data('Fluff', clips_fluff, list(clips_fluff[0].keys()), 2)
+# test0 = format_post_data(post_match_threads, list(post_match_threads[0].keys()), 15)
+# test1 = format_post_data(news, list(news[0].keys()), 5)
+# test2 = format_post_data(clips_fluff, list(clips_fluff[0].keys()), 2)
+# print(test1)
+# print(test2)
